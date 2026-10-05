@@ -1,0 +1,43 @@
+{{- /*
+  Optional writeup header box. Renders only if the front matter sets at least
+  one of these fields, so normal articles are unaffected:
+
+    platform:   "Hack The Box"
+    machine:    "Cascade"
+    ctf:        "picoCTF 2026"
+    category:   "Active Directory"
+    difficulty: "Medium"
+    os:         "Windows"
+    solved:     2026-09-12
+*/ -}}
+{{- $labels := slice
+  (slice "platform" "Platform")
+  (slice "machine" "Machine")
+  (slice "ctf" "CTF")
+  (slice "category" "Category")
+  (slice "difficulty" "Difficulty")
+  (slice "os" "OS")
+  (slice "solved" "Solved")
+}}
+{{- $has := false }}
+{{- range $labels }}{{ if isset $.Params (index . 0) }}{{ $has = true }}{{ end }}{{ end }}
+{{- if $has }}
+<dl class="writeup-box">
+  {{- range $labels }}
+  {{- $key := index . 0 }}{{ $label := index . 1 }}
+  {{- with $.Param $key }}
+  <div>
+    <dt>{{ $label }}</dt>
+    <dd>
+      {{- $v := . }}
+      {{- if findRE `^\d{4}-\d{2}-\d{2}` (printf "%v" $v) -}}
+        <time datetime="{{ time.Format "2006-01-02" $v }}">{{ time.Format (site.Params.dateFormat | default "Jan 2, 2006") $v }}</time>
+      {{- else -}}
+        {{ $v }}
+      {{- end -}}
+    </dd>
+  </div>
+  {{- end }}
+  {{- end }}
+</dl>
+{{- end }}

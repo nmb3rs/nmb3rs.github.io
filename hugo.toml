@@ -1,0 +1,61 @@
+baseURL = "https://numb3rs.re/"
+languageCode = "en"
+title = "Numb3rs' blog"
+enableRobotsTXT = true
+enableEmoji = true
+
+# Only posts get an RSS feed; taxonomy feeds are noise for a small blog.
+disableKinds = []
+
+[params]
+  # Shown in <meta name="description"> on the home page and as the site tagline.
+  description = "Security articles and CTF writeups."
+  author = "numb3rs.re"
+  dateFormat = "Jan 2, 2006"
+  showReadingTime = true
+  # Optional: set to your own avatar in static/ if you want one on the home page.
+  # avatar = "/avatar.jpg"
+
+  # Footer links. Delete the ones you don't use.
+  [[params.social]]
+    name = "GitHub"
+    url = "https://github.com/nmb3rs"
+  [[params.social]]
+    name = "Discord"
+    url = "@numb3rss"
+
+
+[menu]
+  [[menu.main]]
+    name = "Posts"
+    pageRef = "/posts"
+    weight = 10
+  [[menu.main]]
+    name = "Tags"
+    pageRef = "/tags"
+    weight = 20
+  [[menu.main]]
+    name = "About"
+    pageRef = "/about"
+    weight = 30
+
+[taxonomies]
+  tag = "tags"
+
+[markup]
+  [markup.highlight]
+    # Class-based highlighting so code colors can follow the light/dark theme.
+    noClasses = false
+    lineNos = false
+    tabWidth = 4
+    guessSyntax = true
+  [markup.goldmark.renderer]
+    # Allows raw HTML in posts (useful for <details>, images with captions...).
+    unsafe = true
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 3
+
+[services]
+  [services.rss]
+    limit = 20

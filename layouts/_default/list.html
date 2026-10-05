@@ -1,0 +1,18 @@
+{{ define "main" }}
+<header class="page-head">
+  <h1>{{ .Title }}</h1>
+  {{ with .Content }}<div class="prose">{{ . }}</div>{{ end }}
+</header>
+
+{{ $pages := .RegularPages }}
+{{ if $pages }}
+<section class="post-list">
+  {{ range $pages.GroupByDate "2006" }}
+  <h2 class="year">{{ .Key }}</h2>
+  {{ range .Pages }}{{ partial "post-list-item.html" . }}{{ end }}
+  {{ end }}
+</section>
+{{ else }}
+<p class="empty">Nothing here yet.</p>
+{{ end }}
+{{ end }}

@@ -1,0 +1,17 @@
+{{ define "main" }}
+<section class="intro">
+  <h1>{{ .Title }}</h1>
+  {{ with .Content }}<div class="prose">{{ . }}</div>{{ end }}
+</section>
+
+{{ $posts := where site.RegularPages "Section" "posts" }}
+{{ with $posts | first 8 }}
+<section class="post-list">
+  <h2 class="section-title">Latest posts</h2>
+  {{ range . }}{{ partial "post-list-item.html" . }}{{ end }}
+  {{ if gt (len $posts) 8 }}
+  <p class="more"><a href="{{ "/posts/" | relURL }}">All posts →</a></p>
+  {{ end }}
+</section>
+{{ end }}
+{{ end }}

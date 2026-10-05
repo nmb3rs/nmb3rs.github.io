@@ -1,0 +1,13 @@
+{{- $fmt := site.Params.dateFormat | default "Jan 2, 2006" -}}
+<p class="meta">
+  {{- with .Date }}<time datetime="{{ .Format "2006-01-02" }}">{{ .Format $fmt }}</time>{{ end }}
+  {{- if and site.Params.showReadingTime (gt .ReadingTime 0) }}
+  <span class="sep">·</span>{{ .ReadingTime }} min read
+  {{- end }}
+  {{- with .Params.tags }}
+  <span class="sep">·</span>
+  <span class="tags">
+    {{- range . }}<a class="tag" href="{{ (urlize .) | printf "/tags/%s/" | relURL }}">{{ . }}</a>{{ end }}
+  </span>
+  {{- end }}
+</p>

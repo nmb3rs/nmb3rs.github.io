@@ -1,0 +1,32 @@
+{{ define "main" }}
+<article class="post">
+  <header class="post-head">
+    <h1>{{ .Title }}</h1>
+    {{ if ne .Type "page" }}{{ partial "post-meta.html" . }}{{ end }}
+    {{ with .Description }}<p class="lede">{{ . }}</p>{{ end }}
+  </header>
+
+  {{ partial "writeup-box.html" . }}
+
+  {{- $toc := .TableOfContents }}
+  {{- $headings := len (findRE "<li" $toc) }}
+  {{- if and (.Params.toc | default true) (ge $headings 3) }}
+  {{- /* Hugo's .TableOfContents is already a <nav>, so wrap it in a div. */}}
+  <div class="toc">
+    <p class="toc-title">Contents</p>
+    {{ $toc }}
+  </div>
+  {{- end }}
+
+  <div class="prose">
+    {{ .Content }}
+  </div>
+
+  {{- if or .PrevInSection .NextInSection }}
+  <nav class="post-nav" aria-label="More posts">
+    <div>{{ with .PrevInSection }}<span>Newer</span><a href="{{ .RelPermalink }}">{{ .Title }}</a>{{ end }}</div>
+    <div class="next">{{ with .NextInSection }}<span>Older</span><a href="{{ .RelPermalink }}">{{ .Title }}</a>{{ end }}</div>
+  </nav>
+  {{- end }}
+</article>
+{{ end }}

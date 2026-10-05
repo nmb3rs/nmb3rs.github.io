@@ -1,0 +1,13 @@
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <p>© {{ now.Year }} {{ site.Params.author | default site.Title }}</p>
+    <p class="footer-links">
+      {{- range site.Params.social }}
+      <a href="{{ .url }}" rel="me noopener">{{ .name }}</a>
+      {{- end }}
+      {{- with site.Home.OutputFormats.Get "rss" }}
+      <a href="{{ .Permalink }}">RSS</a>
+      {{- end }}
+    </p>
+  </div>
+</footer>

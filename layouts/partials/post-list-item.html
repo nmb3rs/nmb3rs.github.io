@@ -1,0 +1,5 @@
+<article class="post-item">
+  <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+  {{ partial "post-meta.html" . }}
+  <p class="excerpt">{{ with .Description }}{{ . }}{{ else }}{{ .Summary | plainify | truncate 200 }}{{ end }}</p>
+</article>

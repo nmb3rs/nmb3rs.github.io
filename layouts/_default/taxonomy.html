@@ -1,0 +1,11 @@
+{{ define "main" }}
+<header class="page-head">
+  <p class="eyebrow">Tag</p>
+  <h1>{{ .Title }}</h1>
+  <p class="meta">{{ len .Pages }} post{{ if ne (len .Pages) 1 }}s{{ end }}</p>
+</header>
+
+<section class="post-list">
+  {{ range .Pages }}{{ partial "post-list-item.html" . }}{{ end }}
+</section>
+{{ end }}
