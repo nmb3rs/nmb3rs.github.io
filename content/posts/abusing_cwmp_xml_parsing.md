@@ -1,7 +1,7 @@
 ---
 title: "0day: Abusing custom CWMP XML parsing to achieve RCE"
 date: 2025-07-27T14:12:09-07:00
-description: "Reverse-engineering a custom CWMP protocol implementation and chaining to bugs to achieve RCE."
+description: "Reverse-engineering a custom CWMP protocol implementation and chaining bugs to achieve RCE."
 tags: ["iots", "0day"]
 draft: false
 ---
